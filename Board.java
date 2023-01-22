@@ -4,7 +4,7 @@ import java.io.Console;
  * An immutable class that represents the state of the 2×2 tic-tac-toe board.
  */
 
-public class Board {
+public final class Board {
 
     private char[][] board = new char[3][3];
 
@@ -25,6 +25,31 @@ public class Board {
 
     }
 
+    public Board(char[][] content)
+    {
+        for(int i =0;i<3;i++)
+        {
+            for (int j =0;j<3;j++)
+            {
+                board[i][j] = content[i][j];
+            }
+        }    
+    }
+
+    public Board valueCopy(Board other)
+    {
+        char xy[][] = new char[3][3];
+        for(int i =0;i<3;i++)
+        {
+            for (int j =0;j<3;j++)
+            {
+                xy[i][j] = other.get(i, j);
+            }
+        }
+        return new Board(xy);
+    }
+
+
     /**
      * Given the 'other' board as a starting condition, apply the given
      * 'move' to generate this board's state.
@@ -33,25 +58,52 @@ public class Board {
         /*
          * TBD
          */
-        Board newBoard = other;
+        char xy[][] = new char[3][3];
+        for(int i =0;i<3;i++)
+        {
+            for (int j =0;j<3;j++)
+            {
+                xy[i][j] = other.get(i, j);
+                
+            }
+        }
         int iCord = move.getI();
         int jCord = move.getJ();
-        newBoard.board[iCord][jCord] = move.getPiece();
+        xy[iCord][jCord]=move.getPiece();
+        
+
+        board = xy;
+        ////newBoard.board[iCord][jCord] = move.getPiece();
+
     }
 
     /**
      * Convert to a string that shows the board's state.
      */
     public String toString() {
+        /*
+         * String h = "";
+         * for (int i = 0; i < 3; i++) {
+         * for (int j = 0; j < 3; j++) {
+         * h += board[i][j];
+         * }
+         * }
+         * System.out.println(h);
+         * return h;
+         */
         String toString = "";
-        toString +=("-------------\n");
-        toString+=("| " + get(0, 0) + " | " + get(1, 0) + " | " + get(2, 0) + " |\n");
-        toString+=("-------------\n");
-        toString+=("| " + get(0, 1) + " | " + get(1, 1) + " | " + get(2, 1) + " |\n");
-        toString+=("-------------\n");
-        toString+=("| " + get(0, 2) + " | " + get(1, 2) + " | " + get(2, 2) + " |\n");
-        toString+=("-------------\n");
+        toString += ("-------------\n");
+        toString += ("| " + get(0, 0) + " | " + get(1, 0) + " | " + get(2, 0) +
+            " |\n");
+        toString += ("-------------\n");
+        toString += ("| " + get(0, 1) + " | " + get(1, 1) + " | " + get(2, 1) +
+            " |\n");
+        toString += ("-------------\n");
+        toString += ("| " + get(0, 2) + " | " + get(1, 2) + " | " + get(2, 2) +
+            " |\n");
+        toString += ("-------------\n");
         return toString;
+
     }
 
     /**

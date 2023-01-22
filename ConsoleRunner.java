@@ -27,15 +27,15 @@ public class ConsoleRunner {
         challenge = false;
         System.out.println("Do you want to play as X (Y/N) :");
 
-        String yNAns = scanner.nextLine();
-        if ((yNAns == "Y") || (yNAns == "y")) {
-            playAsX = false;
+        String yNAns = scanner.nextLine().toString();
+        if ((yNAns.equals("Y")) || (yNAns.equals("y"))) {
+            playAsX = true;
         }
 
         System.out.println("Do you want a challenge (Y/N)");
-        yNAns = scanner.nextLine();
-        if ((yNAns == "Y") || (yNAns == "y")) {
-            challenge = false;
+        yNAns = scanner.nextLine().toString();
+        if ((yNAns.equals("Y")) || (yNAns.equals("y"))) {
+            challenge = true;
         }
 
         /*
@@ -46,7 +46,7 @@ public class ConsoleRunner {
          */
 
         game = new Game(playAsX, challenge);
-        
+
     }
 
     /**
@@ -63,5 +63,64 @@ public class ConsoleRunner {
 
         String strBoard = (game.getBoard().toString());
         System.out.println(strBoard);
+
+        while (game.getStatus().equals(GameStatus.IN_PROGRESS)) {
+            int yCord;
+            int xCord;
+            boolean playerTurn;
+            playerTurn = game.getTurn();
+            if (playerTurn) {
+                System.out.println("Enter Desired x-coordinate: ");
+                xCord = scanner.nextInt();
+
+                System.out.println("Enter Desired y-coordinate: ");
+                yCord = scanner.nextInt();
+                boolean properSpot = game.placePlayerPiece(xCord, yCord);
+                if (properSpot) {
+                    game.playerTurn = false;
+                } else {
+                    System.out.println("Sorry, invalid input. Please type again\n");
+                }
+                ;
+                strBoard = (game.getBoard().toString());
+                if (properSpot) {
+                    System.out.print("After Your Move: \n");
+                    System.out.println(strBoard);
+                }
+            } else {
+                playerTurn = true;
+                game.aiPlacePiece();
+                strBoard = (game.getBoard().toString());
+                System.out.println(strBoard);
+
+            }
+
+            if (game.getStatus().equals(GameStatus.DRAW)) {
+                System.out.println("Draw :/\n");
+            }
+            if (game.getStatus().equals(GameStatus.O_WON)) {
+                if (!playAsX) {
+                    System.out.println("You Win!\n");
+                } else {
+                    System.out.println("You Lost.\n");
+                }
+            }
+            if (game.getStatus().equals(GameStatus.X_WON)) {
+                if (playAsX) {
+                    System.out.println("You Win!\n");
+                } else {
+                    System.out.println("You Lost.\n");
+                }
+            }
+        }
+/*
+        System.out.println("Do you want to play again as X (Y/N) :");
+
+        String yNAns = scanner.nextLine().toString();
+        if ((yNAns.equals("Y")) || (yNAns.equals("y"))) {
+            mainLoop();
+        }
+*/
     }
+
 }
