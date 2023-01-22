@@ -40,8 +40,9 @@ public class DumbAI implements AI {
          
          */
 
-         int x = random.nextInt(2);
-         int y = random.nextInt(2);
+         int x = ((int)random.nextInt(3));
+         int y = ((int)random.nextInt(3));
+         
          Move m = new Move(x, y, xOrO);
          return m;
 

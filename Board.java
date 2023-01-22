@@ -1,4 +1,4 @@
-import java.io.Console;
+
 
 /**
  * An immutable class that represents the state of the 2×2 tic-tac-toe board.

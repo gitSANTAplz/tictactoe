@@ -1,6 +1,4 @@
-import java.lang.management.PlatformLoggingMXBean;
 
-import javax.swing.text.PlainView;
 
 /**
  * Represents the logic of the game in terms of detecting wins or draws. Also
@@ -9,9 +7,6 @@ import javax.swing.text.PlainView;
 
 public class Game {
     private Board board = new Board();
-    private Board secondBoard;
-    // private Object bord;
-    private GameStatus status;
     private AI ai;
     public static char playerXO;
     public static char aiXO;
@@ -152,20 +147,14 @@ public class Game {
         /*
          * TBD
          */
-        boolean good = false;
-        do {
-            int moves = 0;
-            Move aiMove = ai.chooseMove(board);
-            if (((moves<1)&&(board.get(aiMove.getI(), aiMove.getJ()) == ' '))) {
-                board = new Board(board, aiMove);
-                good = true;
-                moves++;
-            } else {
-            
-            }
 
-
+        Move m = ai.chooseMove(board);
+        
+        char spot = board.get(m.getI(),m.getJ());
+        char space = ' ';
+        if(space == spot)
+        {
+            board = new Board(board, m);
         }
-        while(!good);
     }
 }
