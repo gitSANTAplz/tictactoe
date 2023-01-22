@@ -1,3 +1,4 @@
+
 /**
  * ConsoleRunner:  Prompts the user to determine the parameters of the Game
  * constructor.  Creates a Game and manages the alternating calls to the
@@ -9,14 +10,7 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
 
-    /**
-     * Should the human player be the X?  Note that X always
-     * goes first.
-     */
-    private boolean playerIsX;
-
     private Game game;
-    
     // Use to process text input from the user.
     private Scanner scanner = new Scanner(System.in);
 
@@ -27,28 +21,47 @@ public class ConsoleRunner {
     /**
      * Constructor
      */
-    public ConsoleRunner() {    
+    public ConsoleRunner() {
+
+        playAsX = false;
+        challenge = false;
+        System.out.println("Do you want to play as X (Y/N) :");
+
+        String yNAns = scanner.nextLine();
+        if ((yNAns == "Y") || (yNAns == "y")) {
+            playAsX = false;
+        }
+
+        System.out.println("Do you want a challenge (Y/N)");
+        yNAns = scanner.nextLine();
+        if ((yNAns == "Y") || (yNAns == "y")) {
+            challenge = false;
+        }
+
         /*
          * TBD
          *
          * Use the 'next' method of Scanner and the 'matches' of the String
          * class to process user responses as strings.
          */
+
+        game = new Game(playAsX, challenge);
+        
     }
 
     /**
      * Enter the main control loop which returns only at the end of the game
      * when one party has won or there has been a draw.
      */
+
+    public boolean playAsX = false;
+    public boolean challenge = false;
+    public boolean keepGoing = true;
+    public Board currentBoard;
+
     public void mainLoop() {
-        /*
-         * TBD
-         *
-         * Use the 'nextInt' method of Scanner class to read user responses as
-         * integers.
-         *
-         * There is enough work to do here that you may want to introduce
-         * private methods (i.e. helper methods).
-         */
+
+        String strBoard = (game.getBoard().toString());
+        System.out.println(strBoard);
     }
 }

@@ -1,5 +1,7 @@
+import java.io.Console;
+
 /**
- * An immutable class that represents the state of the 3×3 tic-tac-toe board.
+ * An immutable class that represents the state of the 2×2 tic-tac-toe board.
  */
 
 public class Board {
@@ -14,9 +16,13 @@ public class Board {
      * Construct an empty board (contains all space char's).
      */
     public Board() {
-        /*
-         * TBD
-         */
+        for (int i = 0; i < 3; i++) {
+            board[i][0] = ' ';
+            board[i][1] = ' ';
+            board[i][2] = ' ';
+
+        }
+
     }
 
     /**
@@ -27,33 +33,49 @@ public class Board {
         /*
          * TBD
          */
+        Board newBoard = other;
+        int iCord = move.getI();
+        int jCord = move.getJ();
+        newBoard.board[iCord][jCord] = move.getPiece();
     }
 
     /**
      * Convert to a string that shows the board's state.
      */
     public String toString() {
-        /*
-         * TBD
-         */
+        String toString = "";
+        toString +=("-------------\n");
+        toString+=("| " + get(0, 0) + " | " + get(1, 0) + " | " + get(2, 0) + " |\n");
+        toString+=("-------------\n");
+        toString+=("| " + get(0, 1) + " | " + get(1, 1) + " | " + get(2, 1) + " |\n");
+        toString+=("-------------\n");
+        toString+=("| " + get(0, 2) + " | " + get(1, 2) + " | " + get(2, 2) + " |\n");
+        toString+=("-------------\n");
+        return toString;
     }
 
     /**
-     * Get the entry of the board at column i, row j.  Both indices should
+     * Get the entry of the board at column i, row j. Both indices should
      * be in the range [0, 2].
      */
     public char get(int i, int j) {
-        /*
-         * TBD
-         */
+        return board[i][j];
     }
-    
+
     /**
      * @return true if there remain no empty spots on the board.
      */
     public boolean isFull() {
-        /*
-         * TBD
-         */
+        if ((((board[0][0] == 'X') || (board[0][0] == 'O')) && ((board[0][1] == 'X') || (board[0][1] == 'O'))
+                && ((board[0][2] == 'X') || (board[0][2] == 'O')))) {
+            if ((((board[1][0] == 'X') || (board[1][0] == 'O')) && ((board[1][1] == 'X') || (board[1][1] == 'O'))
+                    && ((board[1][2] == 'X') || (board[1][2] == 'O')))) {
+                if ((((board[2][0] == 'X') || (board[2][0] == 'O')) && ((board[2][1] == 'X') || (board[2][1] == 'O'))
+                        && ((board[2][2] == 'X') || (board[2][2] == 'O')))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

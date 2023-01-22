@@ -1,5 +1,5 @@
 /**
- * Represents the logic of the game in terms of detecting wins or draws.  Also
+ * Represents the logic of the game in terms of detecting wins or draws. Also
  * places new pieces for the human player or AI.
  */
 
@@ -19,6 +19,7 @@ public class Game {
         /*
          * TBD
          */
+
     }
 
     /**
@@ -28,6 +29,7 @@ public class Game {
         /*
          * TBD
          */
+        return board;
     }
 
     /**
@@ -38,21 +40,20 @@ public class Game {
          * TBD
          */
     }
-    
+
     /**
      * Place a piece for the player on the board.
+     * 
      * @param i i-coordinate of desired position.
      * @param j j-coordinate of desired position
      * @return true only if the coordinates of the desired position are in
-     * range and the corresponding cell is empty.
+     *         range and the corresponding cell is empty.
      *
      * @precondition status == IN_PROGRESS
      *
      */
     public boolean placePlayerPiece(int i, int j) {
-        /*
-         * TBD
-         */
+
     }
 
     /**
