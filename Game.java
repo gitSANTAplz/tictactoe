@@ -64,9 +64,7 @@ public class Game {
      * Get the game's status.
      */
     public GameStatus getStatus() {
-        if (board.isFull()) {
-            return GameStatus.DRAW;
-        }
+
         boolean winX = false;
         for (int i = 0; i < 3; i++) {
             if ((board.get(i, 2) == 'X') && (board.get(i, 1) == 'X') && (board.get(i, 0) == 'X')) {
@@ -82,6 +80,11 @@ public class Game {
             }
 
             if ((board.get(2, i) == 'X') && (board.get(1, i) == 'X') && (board.get(0, i) == 'X')) {
+                winX = true;
+            }
+
+            
+            if ((board.get(2,0) == 'X') && (board.get(1,1) == 'X') && (board.get(0,2) == 'X')) {
                 winX = true;
             }
         }
@@ -105,14 +108,21 @@ public class Game {
             if ((board.get(2, i) == 'O') && (board.get(1, i) == 'O') && (board.get(0, i) == 'O')) {
                 winO = true;
             }
+
+            if ((board.get(2,0) == 'O') && (board.get(1,1) == 'O') && (board.get(0,2) == 'O')) {
+                winO = true;
+            }
         }
         if (winO) {
             return GameStatus.O_WON;
         }
-
+        if (board.isFull()) {
+            return GameStatus.DRAW;
+        }
         else {
             return GameStatus.IN_PROGRESS;
         }
+
     }
 
     /**
