@@ -156,5 +156,9 @@ public class Game {
         {
             board = new Board(board, m);
         }
+        else
+        {
+            aiPlacePiece();
+        }
     }
 }

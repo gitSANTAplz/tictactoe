@@ -63,12 +63,11 @@ public class ConsoleRunner {
 
         String strBoard = (game.getBoard().toString());
         System.out.println(strBoard);
-
-        while (game.getStatus().equals(GameStatus.IN_PROGRESS)) {
+        boolean playerTurn;
+        playerTurn = game.getTurn();
+        do {
             int yCord;
             int xCord;
-            boolean playerTurn;
-            playerTurn = game.getTurn();
             if (playerTurn) {
                 System.out.println("Enter Desired x-coordinate: ");
                 xCord = scanner.nextInt();
@@ -80,17 +79,21 @@ public class ConsoleRunner {
                     game.playerTurn = false;
                 } else {
                     System.out.println("Sorry, invalid input. Please type again\n");
+        
                 }
                 ;
                 strBoard = (game.getBoard().toString());
                 if (properSpot) {
                     System.out.print("After Your Move: \n");
                     System.out.println(strBoard);
+                    playerTurn = false;
                 }
             } else {
-                playerTurn = true;
                 game.aiPlacePiece();
+                playerTurn = true;
+
                 strBoard = (game.getBoard().toString());
+                System.out.println("After AI move:\n");
                 System.out.println(strBoard);
 
             }
@@ -112,15 +115,15 @@ public class ConsoleRunner {
                     System.out.println("You Lost.\n");
                 }
             }
-        }
-/*
-        System.out.println("Do you want to play again as X (Y/N) :");
-
-        String yNAns = scanner.nextLine().toString();
-        if ((yNAns.equals("Y")) || (yNAns.equals("y"))) {
-            mainLoop();
-        }
-*/
+        } while (game.getStatus().equals(GameStatus.IN_PROGRESS));
+        /*
+         * System.out.println("Do you want to play again as X (Y/N) :");
+         * 
+         * String yNAns = scanner.nextLine().toString();
+         * if ((yNAns.equals("Y")) || (yNAns.equals("y"))) {
+         * mainLoop();
+         * }
+         */
     }
 
 }
